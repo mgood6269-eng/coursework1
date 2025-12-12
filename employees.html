@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="card">
+    <h2 style="margin-top:0">Список сотрудников</h2>
+
+    <a class="btn-view" href="{{ url_for('add_employee') }}">+ Добавить сотрудника</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Должность</th>
+            <th>Отдел</th>
+            <th>Действия</th>
+        </tr>
+        {% for e in employees %}
+        <tr>
+            <td>{{ e.employee_id }}</td>
+            <td>{{ e.first_name }} {{ e.last_name }}</td>
+            <td>{{ e.phone or '-' }}</td>
+            <td>{{ e.position_name or '-' }}</td>
+            <td>{{ e.department_name or '-' }}</td>
+            <td>
+                <a class="btn-view" href="{{ url_for('view_employee', id=e.employee_id) }}">Просмотр</a>
+                <form method="POST" action="{{ url_for('delete_employee', id=e.employee_id) }}" style="display:inline;">
+                    <button class="btn-danger" onclick="return confirm('Удалить сотрудника?')">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+

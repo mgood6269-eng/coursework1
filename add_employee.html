@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+    <h2>Добавить сотрудника</h2>
+    <form method="post" class="form">
+        <label>Имя</label>
+        <input type="text" name="first_name" required>
+
+        <label>Фамилия</label>
+        <input type="text" name="last_name" required>
+
+        <label>Дата рождения</label>
+        <input type="date" name="birth_date">
+
+        <label>Телефон</label>
+        <input type="text" name="phone">
+
+        <label>Email</label>
+        <input type="email" name="email">
+
+        <label>Дата приема</label>
+        <input type="date" name="hire_date">
+
+        <label>Должность</label>
+        <select name="position_id" required>
+            {% for p in positions %}
+                <option value="{{ p.position_id }}">{{ p.title }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Отдел</label>
+        <select name="department_id" required>
+            {% for d in departments %}
+                <option value="{{ d.department_id }}">{{ d.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
+
+

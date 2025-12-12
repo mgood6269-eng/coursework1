@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+    <h2>Добавить отпуск</h2>
+    <form method="POST" class="form-card">
+        <label>Дата начала:</label>
+        <input type="date" name="from_date" required>
+
+        <label>Дата окончания:</label>
+        <input type="date" name="to_date" required>
+
+        <button type="submit" class="btn">Сохранить</button>
+    </form>
+
+    <p style="margin-top:8px"><a href="{{ url_for('view_employee', id=employee_id) }}">Назад</a></p>
+</div>
+{% endblock %}
+

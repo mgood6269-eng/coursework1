@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Карточка сотрудника</h2>
+
+    <p><strong>ID:</strong> {{ emp.employee_id }}</p>
+    <p><strong>Имя:</strong> {{ emp.first_name }}</p>
+    <p><strong>Фамилия:</strong> {{ emp.last_name }}</p>
+    <p><strong>Телефон:</strong> {{ emp.phone or '-' }}</p>
+    <p><strong>Email:</strong> {{ emp.email or '-' }}</p>
+    <p><strong>Дата приема:</strong> {{ emp.hire_date or '-' }}</p>
+    <p><strong>Должность:</strong> {{ emp.position_name or '-' }}</p>
+    <p><strong>Отдел:</strong> {{ emp.department_name or '-' }}</p>
+
+    <div style="margin-top:14px">
+        <a class="btn-view" href="{{ url_for('add_salary', id=emp.employee_id) }}">➕ Добавить зарплату</a>
+        <a class="btn-view" href="{{ url_for('add_vacation', id=emp.employee_id) }}">➕ Добавить отпуск</a>
+    </div>
+</div>
+
+<br>
+
+<!-- ======================= ЗАРПЛАТЫ ============================ -->
+
+<div class="card">
+    <h3>Зарплаты</h3>
+
+    <table>
+        <tr>
+            <th>Сумма</th>
+            <th>Месяц</th>
+        </tr>
+
+        {% for s in salaries %}
+        <tr>
+            <td>{{ s.amount }}</td>
+            <td>{{ format_month(s.from_date) }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2">Записей нет</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+
+<!-- ======================= ОТПУСКА ============================ -->
+
+<div class="card">
+    <h3>Отпуска</h3>
+
+    <table>
+        <tr>
+            <th>С</th>
+            <th>По</th>
+        </tr>
+
+        {% for v in vacations %}
+        <tr>
+            <td>{{ v.start_date }}</td>
+            <td>{{ v.end_date }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2">Нет записей</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+<a class="inline-link" href="{{ url_for('index') }}">← Назад</a>
+
+{% endblock %}
+
+
+
